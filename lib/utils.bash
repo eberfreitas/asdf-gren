@@ -33,12 +33,12 @@ list_all_versions() {
 }
 
 download_release() {
-	local version filename url release_filename
-	local os_type=$(uname -s)
-	local architecture=$(uname -m)
+	local version filename url release_filename os_type architecture
 
 	version="$1"
 	filename="$2"
+	os_type=$(uname -s)
+	architecture=$(uname -m)
 
 	case "${os_type}_${architecture}" in
 		Linux_*) release_filename="gren_linux" ;;
