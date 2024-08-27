@@ -6,11 +6,6 @@
 
 </div>
 
-# Contents
-
-- [Install](#install)
-- [License](#license)
-
 # Install
 
 Plugin:
