@@ -41,10 +41,10 @@ download_release() {
 	architecture=$(uname -m)
 
 	case "${os_type}_${architecture}" in
-		Linux_*) release_filename="gren_linux" ;;
-		Darwin_x86_64) release_filename="gren_mac" ;;
-		Darwin_arm64) release_filename="gren_mac_aarch64" ;;
-		*) fail "Unsupported platform" ;;
+	Linux_*) release_filename="gren_linux" ;;
+	Darwin_x86_64) release_filename="gren_mac" ;;
+	Darwin_arm64) release_filename="gren_mac_aarch64" ;;
+	*) fail "Unsupported platform" ;;
 	esac
 
 	url="$GH_REPO/releases/download/${version}/${release_filename}"
