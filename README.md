@@ -16,8 +16,6 @@
 Plugin:
 
 ```shell
-asdf plugin add gren
-# or
 asdf plugin add gren https://github.com/eberfreitas/asdf-gren.git
 ```
 
