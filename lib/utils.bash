@@ -33,11 +33,21 @@ list_all_versions() {
 }
 
 download_release() {
-	local version filename url
+	local version filename url release_filename
+	local os_type=$(uname -s)
+	local architecture=$(uname -m)
+
 	version="$1"
 	filename="$2"
 
-	url="$GH_REPO/releases/download/${version}/gren_linux"
+	case "${os_type}_${architecture}" in
+		Linux_*) release_filename="gren_linux" ;;
+		Darwin_x86_64) release_filename="gren_mac" ;;
+		Darwin_arm64) release_filename="gren_mac_aarch64" ;;
+		*) fail "Unsupported platform" ;;
+	esac
+
+	url="$GH_REPO/releases/download/${version}/${release_filename}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
