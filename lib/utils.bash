@@ -40,10 +40,22 @@ download_release() {
 	os_type=$(uname -s)
 	architecture=$(uname -m)
 
-	case "${os_type}_${architecture}" in
-	Linux_*) release_filename="gren_linux" ;;
-	Darwin_x86_64) release_filename="gren_mac" ;;
-	Darwin_arm64) release_filename="gren_mac_aarch64" ;;
+	case "${os_type}" in
+	Linux) release_filename="gren_linux" ;;
+	Darwin)
+		v1=$(echo "$version" | awk -F. '{ printf("%d%02d%02d", $1,$2,$3); }')
+		v2=$(echo "0.4.5" | awk -F. '{ printf("%d%02d%02d", $1,$2,$3); }')
+
+		if [ "$v1" -lt "$v2" ]; then
+			release_filename="gren_mac"
+		else
+			if [ "$architecture" == "arm64" ]; then
+				release_filename="gren_mac_aarch64"
+			else
+				release_filename="gren_mac"
+			fi
+		fi
+		;;
 	*) fail "Unsupported platform" ;;
 	esac
 
